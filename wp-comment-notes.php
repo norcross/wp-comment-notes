@@ -162,7 +162,7 @@ class WP_Comment_Notes
 					echo '<option value="wpcmn-notes-standard"' . selected( $before_type, 'wpcmn-notes-standard', false ) . '>' . __( 'Standard', 'wpcmn' ) . '</option>';
 					echo '<option value="wpcmn-notes-warning"' . selected( $before_type, 'wpcmn-notes-warning', false ) . '>' . __( 'Warning', 'wpcmn' ) . '</option>';
 					echo '<option value="wpcmn-notes-alert"' . selected( $before_type, 'wpcmn-notes-alert', false ) . '>' . __( 'Alert', 'wpcmn' ) . '</option>';
-					echo apply_filters( 'wpcmn_before_types', $before_type );
+					do_action( 'wpcmn_before_types', $before_type );
 					echo '</select>';
 				echo '</td>';
 			echo '</tr>';
@@ -185,7 +185,7 @@ class WP_Comment_Notes
 					echo '<option value="wpcmn-notes-standard"' . selected( $after_type, 'wpcmn-notes-standard', false ) . '>' . __( 'Standard', 'wpcmn' ) . '</option>';
 					echo '<option value="wpcmn-notes-warning"' . selected( $after_type, 'wpcmn-notes-warning', false ) . '>' . __( 'Warning', 'wpcmn' ) . '</option>';
 					echo '<option value="wpcmn-notes-alert"' . selected( $after_type, 'wpcmn-notes-alert', false ) . '>' . __( 'Alert', 'wpcmn' ) . '</option>';
-					echo apply_filters( 'wpcmn_after_types', $after_type );
+					do_action( 'wpcmn_after_types', $after_type );
 					echo '</select>';
 				echo '</td>';
 			echo '</tr>';
