@@ -24,7 +24,7 @@ Author URI: http://andrewnorcross.com
 */
 
 if( !defined( 'WPCMN_VER' ) )
-	define( 'WPCMN_VER', '1.0.0');
+	define( 'WPCMN_VER', '1.0.0' );
 
 // Start up the engine
 class WP_Comment_Notes
@@ -144,47 +144,47 @@ class WP_Comment_Notes
 		echo '<table class="form-table wpcmn-notes-table">';
 
 			echo '<tr class="wpcmn-notes-title">';
-			echo '<td colspan="2"><h5>'.__( 'Before Notes Area', 'wpcmn' ).'</h5></td>';
+			echo '<td colspan="2"><h5>'.__( 'Before Notes Area', 'wpcmn' ) . '</h5></td>';
 			echo '</tr>';
 
 			echo '<tr class="wpcmn-notes-data wpcmn-notes-before-text">';
-				echo '<th>'.__( 'Message Text', 'wpcmn' ).'</th>';
+				echo '<th>'.__( 'Message Text', 'wpcmn' ) . '</th>';
 				echo '<td>';
-					echo '<textarea class="widefat" name="wpcmn-notes[before-text]" id="wpcmn-before">'.esc_attr( $before_text ).'</textarea>';
-					echo '<p class="description">'.__( 'Note: This will not appear to users who are logged in.', 'wpcmn' ).'</p>';
+					echo '<textarea class="widefat" name="wpcmn-notes[before-text]" id="wpcmn-before">'.esc_attr( $before_text ) . '</textarea>';
+					echo '<p class="description">'.__( 'Note: This will not appear to users who are logged in.', 'wpcmn' ) . '</p>';
 				echo '</td>';
 			echo '</tr>';
 
 			echo '<tr class="wpcmn-notes-data wpcmn-notes-before-type">';
-				echo '<th>'.__( 'Message Type', 'wpcmn' ).'</th>';
+				echo '<th>'.__( 'Message Type', 'wpcmn' ) . '</th>';
 				echo '<td>';
 					echo '<select id="wpcmn-before-type" name="wpcmn-notes[before-type]">';
-					echo '<option value="wpcmn-notes-standard" '.selected( $before_type, 'wpcmn-notes-standard', false ).'>'.__('Standard', 'wpcmn').'</option>';
-					echo '<option value="wpcmn-notes-warning" '.selected( $before_type, 'wpcmn-notes-warning', false ).'>'.__('Warning', 'wpcmn').'</option>';
-					echo '<option value="wpcmn-notes-alert" '.selected( $before_type, 'wpcmn-notes-alert', false ).'>'.__('Alert', 'wpcmn').'</option>';
+					echo '<option value="wpcmn-notes-standard"' . selected( $before_type, 'wpcmn-notes-standard', false ) . '>' . __( 'Standard', 'wpcmn' ) . '</option>';
+					echo '<option value="wpcmn-notes-warning"' . selected( $before_type, 'wpcmn-notes-warning', false ) . '>' . __( 'Warning', 'wpcmn' ) . '</option>';
+					echo '<option value="wpcmn-notes-alert"' . selected( $before_type, 'wpcmn-notes-alert', false ) . '>' . __( 'Alert', 'wpcmn' ) . '</option>';
 					echo apply_filters( 'wpcmn_before_types', $before_type );
 					echo '</select>';
 				echo '</td>';
 			echo '</tr>';
 
 			echo '<tr class="wpcmn-notes-title">';
-			echo '<td colspan="2"><h5>'.__( 'After Notes Area', 'wpcmn' ).'</h5></td>';
+			echo '<td colspan="2"><h5>'.__( 'After Notes Area', 'wpcmn' ) . '</h5></td>';
 			echo '</tr>';
 
 			echo '<tr class="wpcmn-notes-data wpcmn-notes-after-text">';
-				echo '<th>'.__( 'Message Text', 'wpcmn' ).'</th>';
+				echo '<th>'.__( 'Message Text', 'wpcmn' ) . '</th>';
 				echo '<td>';
-					echo '<textarea class="widefat" name="wpcmn-notes[after-text]" id="wpcmn-after">'.esc_attr( $after_text ).'</textarea>';
+					echo '<textarea class="widefat" name="wpcmn-notes[after-text]" id="wpcmn-after">'.esc_attr( $after_text ) . '</textarea>';
 				echo '</td>';
 			echo '</tr>';
 
 			echo '<tr class="wpcmn-notes-data wpcmn-notes-after-type">';
-				echo '<th>'.__( 'Message Type', 'wpcmn' ).'</th>';
+				echo '<th>'.__( 'Message Type', 'wpcmn' ) . '</th>';
 				echo '<td>';
 					echo '<select id="wpcmn-after-type" name="wpcmn-notes[after-type]">';
-					echo '<option value="wpcmn-notes-standard" '.selected( $after_type, 'wpcmn-notes-standard', false ).'>'.__('Standard', 'wpcmn').'</option>';
-					echo '<option value="wpcmn-notes-warning" '.selected( $after_type, 'wpcmn-notes-warning', false ).'>'.__('Warning', 'wpcmn').'</option>';
-					echo '<option value="wpcmn-notes-alert" '.selected( $after_type, 'wpcmn-notes-alert', false ).'>'.__('Alert', 'wpcmn').'</option>';
+					echo '<option value="wpcmn-notes-standard"' . selected( $after_type, 'wpcmn-notes-standard', false ) . '>' . __( 'Standard', 'wpcmn' ) . '</option>';
+					echo '<option value="wpcmn-notes-warning"' . selected( $after_type, 'wpcmn-notes-warning', false ) . '>' . __( 'Warning', 'wpcmn' ) . '</option>';
+					echo '<option value="wpcmn-notes-alert"' . selected( $after_type, 'wpcmn-notes-alert', false ) . '>' . __( 'Alert', 'wpcmn' ) . '</option>';
 					echo apply_filters( 'wpcmn_after_types', $after_type );
 					echo '</select>';
 				echo '</td>';
@@ -219,7 +219,7 @@ class WP_Comment_Notes
 			return $post_id;
 
 		// and make sure the user has the ability to do shit
-		if ( 'page' == $_POST['post_type'] ) :
+		if ( 'page' == $_POST['post_type'] ) {
 
 			if ( ! current_user_can( 'edit_page', $post_id ) ) {
 				return $post_id;
@@ -243,7 +243,7 @@ class WP_Comment_Notes
 				'a'         => array(
 					'href'  => array(),
 					'title' => array(),
-					'class' => array()
+					'class' => array(),
 					'id'    => array()
 				),
 				'br'        => array(),
@@ -301,7 +301,7 @@ class WP_Comment_Notes
 			$text	= $notes['before-text'];
 			$class	= isset( $notes['before-type'] ) ? $notes['before-type'] : 'wpcmn-notes-standard';
 			// build the string
-			$before	= '<p class="wpcmn-notes wpcmn-notes-before '.$class.'">'.esc_attr( $text ).'</p>';
+			$before	= '<p class="wpcmn-notes wpcmn-notes-before' . $class.'">'.esc_attr( $text ) . '</p>';
 			// output
 			$fields['comment_notes_before'] = $before;
 
@@ -312,7 +312,7 @@ class WP_Comment_Notes
 			$text	= $notes['after-text'];
 			$class	= isset( $notes['after-type'] ) ? $notes['after-type'] : 'wpcmn-notes-standard';
 			// build the string
-			$after	= '<p class="wpcmn-notes wpcmn-notes-after '.$class.'">'.esc_attr( $text ).'</p>';
+			$after	= '<p class="wpcmn-notes wpcmn-notes-after' . $class.'">'.esc_attr( $text ) . '</p>';
 			// output
 			$fields['comment_notes_after'] = $after;
 
