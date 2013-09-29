@@ -33,6 +33,52 @@ This section describes how to install the plugin and get it working.
 
 Activate the plugin and the metaboxes will appear for posts. Use the filter to add more post type support.
 
+= Does this work on my custom post type? =
+
+Not by default. Use the `wpcmn_type_support` filter to add it. Example below:
+
+`
+function cmm_partial_types( $types ) {
+
+	$types[] = 'MY_CUSTOM_POST_TYPE';
+
+	return $types;
+}
+add_filter( 'wpcmn_type_support', 'cmm_partial_types' );
+`
+
+= Can I add more options to the message type dropdown? =
+
+Sure can. Use the `wpcmn_before_types` or `wpcmn_after_types` filters. Example:
+
+`
+function cmm_more_before( $before_type ) {
+
+	$extra = '';
+	$extra .= '<option value="wild" '.selected( $before_type, 'wild', false ).'>'.__('Wild', 'wpcmn').'</option>';
+	$extra .= '<option value="crazy" '.selected( $before_type, 'crazy', false ).'>'.__('Crazy', 'wpcmn').'</option>';
+
+	return $extra;
+
+}
+add_filter( 'wpcmn_before_types', 'cmm_more_before' );
+
+`
+
+= I don't like the CSS that comes with it =
+
+Then write your own. It's a free country. If you *have* to disable it, use the `wpcmn_killswitch` filter. Example:
+
+`
+function cmm_killswitch() {
+
+	return true;
+
+}
+add_filter( 'wpcmn_killswitch', 'cmm_killswitch' );
+
+`
+
 = Where is the settings menu? =
 
 There isn't one. On purpose.
@@ -44,7 +90,8 @@ Then you're using a theme / framework that has gone cowboy and done it their own
 
 == Screenshots ==
 
-1.
+1. Example of metaboxes
+2. Example of display
 
 
 

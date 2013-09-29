@@ -280,6 +280,12 @@ class WP_Comment_Notes
 
 	public function front_scripts() {
 
+		// check for killswitch first
+		$killswitch	= apply_filters( 'wpcmn_killswitch', false );
+
+		if ( $killswitch )
+			return false;
+
 		// set post types with filter
 		$types	= array( 'post' );
 		$types	= apply_filters( 'wpcmn_type_support', $types );
