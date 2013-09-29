@@ -1,10 +1,10 @@
 === WP Comment Notes ===
-Contributors: norcross
+Contributors: norcross, mordauk
 Website Link: http://andrewnorcross.com/plugins/
 Donate link: https://andrewnorcross.com/donate
-Tags: api keys, secret keys
+Tags: comments, comment notes, comment
 Requires at least: 3.0
-Tested up to: 3.5
+Tested up to: 3.6
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
