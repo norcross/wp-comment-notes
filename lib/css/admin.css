@@ -1,0 +1,13 @@
+table.wpcmn-notes-table tr.wpcmn-notes-title td {
+	padding: 5px 10px;
+}
+
+table.wpcmn-notes-table tr.wpcmn-notes-title td h5 {
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0;
+}
+
+table.wpcmn-notes-table tr.wpcmn-notes-data th {
+	width: 100px;
+}
