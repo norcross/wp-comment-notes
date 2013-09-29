@@ -33,14 +33,13 @@ class WP_Comment_Notes
 	/**
 	 * Static property to hold our singleton instance
 	 *
-	 * @return WP_Comment_Notes
 	 */
 	static $instance = false;
 
 	/**
 	 * This is our constructor
 	 *
-	 * @return WP_Comment_Notes
+	 * @return void
 	 */
 	private function __construct() {
 		// back end
@@ -70,7 +69,7 @@ class WP_Comment_Notes
 	/**
 	 * load textdomain
 	 *
-	 * @return WP_Comment_Notes
+	 * @return void
 	 */
 
 	public function textdomain() {
@@ -82,7 +81,7 @@ class WP_Comment_Notes
 	/**
 	 * Admin styles
 	 *
-	 * @return WP_Comment_Notes
+	 * @return void
 	 */
 
 	public function admin_scripts() {
@@ -104,7 +103,7 @@ class WP_Comment_Notes
 	/**
 	 * call metabox
 	 *
-	 * @return WP_Comment_Notes
+	 * @return void
 	 */
 
 	public function create_metaboxes( $page, $context ) {
@@ -124,7 +123,7 @@ class WP_Comment_Notes
 	/**
 	 * display meta fields for notes meta
 	 *
-	 * @return WP_Comment_Notes
+	 * @return void
 	 */
 
 	public function wpcmn_notes_meta( $post ) {
@@ -199,7 +198,7 @@ class WP_Comment_Notes
 	/**
 	 * save post metadata
 	 *
-	 * @return WP_Backstretch_Post_Meta
+	 * @return void
 	 */
 
 	public function save_custom_meta( $post_id ) {
@@ -250,7 +249,7 @@ class WP_Comment_Notes
 	/**
 	 * call front-end CSS
 	 *
-	 * @return WP_Comment_Notes
+	 * @return void
 	 */
 
 	public function front_scripts() {
@@ -267,7 +266,7 @@ class WP_Comment_Notes
 	/**
 	 * The actual filter for adding the notes.
 	 *
-	 * @return WP_Comment_Notes
+	 * @return array
 	 */
 
 	public function custom_notes_filter( $fields ) {
