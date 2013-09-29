@@ -238,7 +238,24 @@ class WP_Comment_Notes
 
 		// update side meta data
 		if ( $notes ) {
-			update_post_meta( $post_id, '_wpcmn_notes', $notes );
+
+			$allowed_html = array(
+				'a'         => array(
+					'href'  => array(),
+					'title' => array(),
+					'class' => array()
+					'id'    => array()
+				),
+				'br'        => array(),
+				'em'        => array(),
+				'strong'    => array(),
+				'span'      => array(
+					'class' => array(),
+					'id'    => array()
+				)
+			);
+
+			update_post_meta( $post_id, '_wpcmn_notes', wp_kses( $notes, $allowed_html ) );
 		} else {
 			delete_post_meta( $post_id, '_wpcmn_notes' );
 		}
