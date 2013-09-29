@@ -11,10 +11,9 @@
 	font-style: normal;
 }
 
-p.wpcmn-notes-warning:before {
+p.wpcmn-notes-warning:before,
+p.wpcmn-notes-alert:before {
 	font-family: 'WPCMN';
-	content: "\e000";
-	color: #ff6103;
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -28,19 +27,12 @@ p.wpcmn-notes-warning:before {
 	top: 3px;
 }
 
+p.wpcmn-notes-warning:before {
+	content: "\e000";
+	color: #ff6103;
+}
+
 p.wpcmn-notes-alert:before {
-	font-family: 'WPCMN';
 	content: "\e001";
 	color: #cd0000;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	margin: 0 3px 0 0;
-	display: inline-block;
-	position: relative;
-	top: 3px;
 }
