@@ -256,6 +256,9 @@ class WP_Comment_Notes
 			);
 
 			update_post_meta( $post_id, '_wpcmn_notes', wp_kses( $notes, $allowed_html ) );
+
+			do_action( 'wpcmn_notes_save', $post_id, $notes );
+
 		} else {
 			delete_post_meta( $post_id, '_wpcmn_notes' );
 		}
