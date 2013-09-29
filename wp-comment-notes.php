@@ -304,7 +304,7 @@ class WP_Comment_Notes
 			$text	= $notes['before-text'];
 			$class	= isset( $notes['before-type'] ) ? $notes['before-type'] : 'wpcmn-notes-standard';
 			// build the string
-			$before	= '<p class="wpcmn-notes wpcmn-notes-before' . $class.'">'.esc_attr( $text ) . '</p>';
+			$before	= '<p class="wpcmn-notes wpcmn-notes-before' . $class.'">' . $text . '</p>';
 			// output
 			$fields['comment_notes_before'] = $before;
 
@@ -315,7 +315,7 @@ class WP_Comment_Notes
 			$text	= $notes['after-text'];
 			$class	= isset( $notes['after-type'] ) ? $notes['after-type'] : 'wpcmn-notes-standard';
 			// build the string
-			$after	= '<p class="wpcmn-notes wpcmn-notes-after' . $class.'">'.esc_attr( $text ) . '</p>';
+			$after	= '<p class="wpcmn-notes wpcmn-notes-after' . $class.'">' . $text . '</p>';
 			// output
 			$fields['comment_notes_after'] = $after;
 
