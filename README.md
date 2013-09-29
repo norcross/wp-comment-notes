@@ -45,8 +45,9 @@ Activate the plugin and the metaboxes will appear for posts. Use the filter to a
 
 ### Does this work on my custom post type? ###
 
-Not by default. Use the `wpcmn_type_support` filter to add it. Example below:
+Not by default. Use the `wpcmn_type_support` filter to add it.
 
+**Example:**
 ```php
 function cmm_partial_types( $types ) {
 
@@ -59,8 +60,9 @@ add_filter( 'wpcmn_type_support', 'cmm_partial_types' );
 
 ### Can I add more options to the message type dropdown? ###
 
-Sure can. Use the `wpcmn_before_types` or `wpcmn_after_types` filters. Example:
+Sure can. Use the `wpcmn_before_types` or `wpcmn_after_types` filters.
 
+**Example:**
 ```php
 function cmm_more_before( $before_type ) {
 
@@ -76,8 +78,9 @@ add_filter( 'wpcmn_before_types', 'cmm_more_before' );
 
 ### I don't like the CSS that comes with it ###
 
-Then write your own. It's a free country. If you *have* to disable it, use the `wpcmn_killswitch` filter. Example:
+Then write your own. It's a free country. If you *have* to disable it, use the `wpcmn_killswitch` filter.
 
+**Example:**
 ```php
 function cmm_killswitch() {
 
