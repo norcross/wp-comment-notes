@@ -1,14 +1,23 @@
 # WP Comment Notes #
 
 **Contributors:** norcross, mordauk
+
 **Website Link:** http://andrewnorcross.com/plugins/
+
 **Donate link:** https://andrewnorcross.com/donate
+
 **Tags:** comments, comment notes, comment
+
 **Requires at least:** 3.0
+
 **Tested up to:** 3.6
+
 **Stable tag:** 1.0.0
+
 **License:** GPLv2 or later
+
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
+
 
 Add custom notes before or after the comment form.
 
@@ -38,7 +47,7 @@ Activate the plugin and the metaboxes will appear for posts. Use the filter to a
 
 Not by default. Use the `wpcmn_type_support` filter to add it. Example below:
 
-```
+```php
 function cmm_partial_types( $types ) {
 
 	$types[] = 'MY_CUSTOM_POST_TYPE';
@@ -52,7 +61,7 @@ add_filter( 'wpcmn_type_support', 'cmm_partial_types' );
 
 Sure can. Use the `wpcmn_before_types` or `wpcmn_after_types` filters. Example:
 
-```
+```php
 function cmm_more_before( $before_type ) {
 
 	$extra = '';
@@ -69,7 +78,7 @@ add_filter( 'wpcmn_before_types', 'cmm_more_before' );
 
 Then write your own. It's a free country. If you *have* to disable it, use the `wpcmn_killswitch` filter. Example:
 
-```
+```php
 function cmm_killswitch() {
 
 	return true;
