@@ -221,27 +221,27 @@ class WP_Comment_Notes
 		// and make sure the user has the ability to do shit
 		if ( 'page' == $_POST['post_type'] ) :
 
-			if ( !current_user_can( 'edit_page', $post_id ) ) :
+			if ( ! current_user_can( 'edit_page', $post_id ) ) {
 				return $post_id;
-			endif;
+			}
 
-		else:
+		} else {
 
-			if ( !current_user_can( 'edit_post', $post_id ) ) :
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
 				return $post_id;
-			endif;
+			}
 
-		endif;
+		}
 
 		// all clear. get data via $_POST and store it
-		$notes	= $_POST['wpcmn-notes'];
+		$notes	= ! empty( $_POST['wpcmn-notes'] ) ? $_POST['wpcmn-notes'] : false;
 
 		// update side meta data
-		if ( isset( $notes ) && !empty( $notes ) ) :
+		if ( $notes ) {
 			update_post_meta( $post_id, '_wpcmn_notes', $notes );
-		else:
+		} else {
 			delete_post_meta( $post_id, '_wpcmn_notes' );
-		endif;
+		}
 
 	}
 
