@@ -49,7 +49,7 @@ class WP_Comment_Notes
 		add_action		( 'save_post',							array( $this, 'save_custom_meta'		),	1		);
 
 		// front end
-		add_action		( 'wp_enqueue_scripts',					array( $this, 'front_scripts'			)			);
+		add_action		( 'wp_enqueue_scripts',					array( $this, 'front_scripts'			),	10		);
 		add_filter		( 'comment_form_defaults',				array( $this, 'custom_notes_filter'		) 			);
 	}
 
@@ -90,9 +90,12 @@ class WP_Comment_Notes
 		$types	= array( 'post' );
 		$types	= apply_filters( 'wpcmn_type_support', $types );
 
+		if ( !is_array( $types ) )
+			$types	= array ( $types );
+
 		$screen	= get_current_screen();
 
-		if ( in_array( $screen->base , $types ) ) :
+		if ( in_array( $screen->post_type , $types ) ) :
 
 			wp_enqueue_style( 'wpcmn-admin', plugins_url('lib/css/admin.css', __FILE__), array(), WPCMN_VER, 'all' );
 
@@ -215,6 +218,9 @@ class WP_Comment_Notes
 		$types	= array( 'post' );
 		$types	= apply_filters( 'wpcmn_type_support', $types );
 
+		if ( !is_array( $types ) )
+			$types	= array ( $types );
+
 		if ( !in_array ( $_POST['post_type'], $types ) )
 			return $post_id;
 
@@ -274,9 +280,18 @@ class WP_Comment_Notes
 
 	public function front_scripts() {
 
+		// check for killswitch first
+		$killswitch	= apply_filters( 'wpcmn_killswitch', false );
+
+		if ( $killswitch )
+			return false;
+
 		// set post types with filter
 		$types	= array( 'post' );
 		$types	= apply_filters( 'wpcmn_type_support', $types );
+
+		if ( !is_array( $types ) )
+			$types	= array( $types );
 
 		if ( is_singular( $types ) )
 			wp_enqueue_style( 'wpcmn-notes', plugins_url( 'lib/css/wpcmn-notes.css', __FILE__ ), array(), WPCMN_VER, 'all' );
@@ -304,7 +319,9 @@ class WP_Comment_Notes
 			$text	= $notes['before-text'];
 			$class	= isset( $notes['before-type'] ) ? $notes['before-type'] : 'wpcmn-notes-standard';
 			// build the string
+
 			$before	= '<p class="wpcmn-notes wpcmn-notes-before' . esc_attr( $class ) . '">' . $text . '</p>';
+
 			// output
 			$fields['comment_notes_before'] = $before;
 
@@ -315,7 +332,9 @@ class WP_Comment_Notes
 			$text	= $notes['after-text'];
 			$class	= isset( $notes['after-type'] ) ? $notes['after-type'] : 'wpcmn-notes-standard';
 			// build the string
+
 			$after	= '<p class="wpcmn-notes wpcmn-notes-after' . esc_attr( $class ) . '">' . $text . '</p>';
+
 			// output
 			$fields['comment_notes_after'] = $after;
 
