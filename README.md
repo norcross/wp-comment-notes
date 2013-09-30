@@ -82,12 +82,7 @@ Then write your own. It's a free country. If you *have* to disable it, use the `
 
 **Example:**
 ```php
-function cmm_killswitch() {
-
-	return true;
-
-}
-add_filter( 'wpcmn_killswitch', 'cmm_killswitch' );
+add_filter( 'wpcmn_killswitch', '__return_true' );
 ```
 
 ### Where is the settings menu? ###
