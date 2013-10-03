@@ -13,7 +13,7 @@ Add custom notes before or after the comment form.
 
 == Description ==
 
-Add custom notes before or after the comment form.
+Add custom notes before or after the comment form on a post by post basis.
 
 
 == Installation ==
