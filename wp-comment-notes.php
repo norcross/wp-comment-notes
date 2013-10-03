@@ -86,12 +86,7 @@ class WP_Comment_Notes
 
 	public function admin_scripts() {
 
-		// set post types with filter
-		$types	= array( 'post' );
-		$types	= apply_filters( 'wpcmn_type_support', $types );
-
-		if ( !is_array( $types ) )
-			$types	= array ( $types );
+		$types = $this->get_post_types();
 
 		$screen	= get_current_screen();
 
@@ -111,12 +106,7 @@ class WP_Comment_Notes
 
 	public function create_metaboxes( $page, $context ) {
 
-		// set post types with filter
-		$types	= array( 'post' );
-		$types	= apply_filters( 'wpcmn_type_support', $types );
-
-		if ( !is_array( $types ) )
-			$types	= array ( $types );
+		$types = $this->get_post_types();
 
 		if ( in_array( $page,  $types ) )
 			add_meta_box( 'wp-comment-notes', __( 'Comment Notes', 'wpcmn' ), array( $this, 'wpcmn_notes_meta' ), $page, 'advanced', 'high' );
@@ -144,13 +134,22 @@ class WP_Comment_Notes
 		$after_text		= isset( $notes['after-text'] )		? $notes['after-text']	: '';
 		$after_type		= isset( $notes['after-type'] )		? $notes['after-type']	: 'wpcmn-notes-standard';
 
+		echo '<script type="text/javascript">jQuery(document).ready(function($){$("#comment_status").click(function(){$(".wpcmn-notes-table tr").toggle();})});</script>';
+
+		$disabled_display = comments_open( $post_id )   ? ' style="display:none;"' : '';
+		$enabled_display  = ! comments_open( $post_id ) ? ' style="display:none;"' : '';
+
 		echo '<table class="form-table wpcmn-notes-table">';
 
-			echo '<tr class="wpcmn-notes-title">';
+			echo '<tr class="wpcmn-notes-disabled"' . $disabled_display . '>';
+				echo '<th>' . __( 'Enable comments in order to use Comment Notes', 'wpcmn' ) . '</th>';
+			echo '</tr>';
+
+			echo '<tr class="wpcmn-notes-title"' . $enabled_display . '>';
 			echo '<td colspan="2"><h5>'.__( 'Before Notes Area', 'wpcmn' ) . '</h5></td>';
 			echo '</tr>';
 
-			echo '<tr class="wpcmn-notes-data wpcmn-notes-before-text">';
+			echo '<tr class="wpcmn-notes-data wpcmn-notes-before-text"' . $enabled_display . '>';
 				echo '<th>'.__( 'Message Text', 'wpcmn' ) . '</th>';
 				echo '<td>';
 					echo '<textarea class="widefat" name="wpcmn-notes[before-text]" id="wpcmn-before">'.esc_attr( $before_text ) . '</textarea>';
@@ -158,7 +157,7 @@ class WP_Comment_Notes
 				echo '</td>';
 			echo '</tr>';
 
-			echo '<tr class="wpcmn-notes-data wpcmn-notes-before-type">';
+			echo '<tr class="wpcmn-notes-data wpcmn-notes-before-type"' . $enabled_display . '>';
 				echo '<th>'.__( 'Message Type', 'wpcmn' ) . '</th>';
 				echo '<td>';
 					echo '<select id="wpcmn-before-type" name="wpcmn-notes[before-type]">';
@@ -170,18 +169,18 @@ class WP_Comment_Notes
 				echo '</td>';
 			echo '</tr>';
 
-			echo '<tr class="wpcmn-notes-title">';
+			echo '<tr class="wpcmn-notes-title"' . $enabled_display . '>';
 			echo '<td colspan="2"><h5>'.__( 'After Notes Area', 'wpcmn' ) . '</h5></td>';
 			echo '</tr>';
 
-			echo '<tr class="wpcmn-notes-data wpcmn-notes-after-text">';
+			echo '<tr class="wpcmn-notes-data wpcmn-notes-after-text"' . $enabled_display . '>';
 				echo '<th>'.__( 'Message Text', 'wpcmn' ) . '</th>';
 				echo '<td>';
 					echo '<textarea class="widefat" name="wpcmn-notes[after-text]" id="wpcmn-after">'.esc_attr( $after_text ) . '</textarea>';
 				echo '</td>';
 			echo '</tr>';
 
-			echo '<tr class="wpcmn-notes-data wpcmn-notes-after-type">';
+			echo '<tr class="wpcmn-notes-data wpcmn-notes-after-type"' . $enabled_display . '>';
 				echo '<th>'.__( 'Message Type', 'wpcmn' ) . '</th>';
 				echo '<td>';
 					echo '<select id="wpcmn-after-type" name="wpcmn-notes[after-type]">';
@@ -194,7 +193,6 @@ class WP_Comment_Notes
 			echo '</tr>';
 
 		echo '</table>';
-
 
 	}
 
@@ -214,12 +212,7 @@ class WP_Comment_Notes
 		if ( ! isset( $_POST['wpcmn_meta_nonce'] ) || ! wp_verify_nonce( $_POST['wpcmn_meta_nonce'], 'wpcmn_meta_nonce' ) )
 			return $post_id;
 
-		// check post types with filter
-		$types	= array( 'post' );
-		$types	= apply_filters( 'wpcmn_type_support', $types );
-
-		if ( !is_array( $types ) )
-			$types	= array ( $types );
+		$types = $this->get_post_types();
 
 		if ( !in_array ( $_POST['post_type'], $types ) )
 			return $post_id;
@@ -286,12 +279,7 @@ class WP_Comment_Notes
 		if ( $killswitch )
 			return false;
 
-		// set post types with filter
-		$types	= array( 'post' );
-		$types	= apply_filters( 'wpcmn_type_support', $types );
-
-		if ( !is_array( $types ) )
-			$types	= array( $types );
+		$types = $this->get_post_types();
 
 		if ( is_singular( $types ) )
 			wp_enqueue_style( 'wpcmn-notes', plugins_url( 'lib/css/wpcmn-notes.css', __FILE__ ), array(), WPCMN_VER, 'all' );
@@ -342,6 +330,25 @@ class WP_Comment_Notes
 
 
 		return $fields;
+	}
+
+
+	/**
+	 * Return the list of post types that support Comment Notes
+	 *
+	 * @return array
+	 */
+	public function get_post_types() {
+
+		$types = get_post_types( array( 'public' => true, 'show_ui' => true ) );
+
+		foreach( $types as $type ) {
+			if( ! post_type_supports( $type, 'comments' ) ) {
+				unset( $types[ $type ] );
+			}
+		}
+
+		return apply_filters( 'wpcmn_type_support', $types );
 	}
 
 /// end class
