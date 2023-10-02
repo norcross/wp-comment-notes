@@ -43,14 +43,14 @@ class WP_Comment_Notes
 	 */
 	private function __construct() {
 		// back end
-		add_action		( 'plugins_loaded', 					array( $this, 'textdomain'				) 			);
-		add_action		( 'admin_enqueue_scripts',				array( $this, 'admin_scripts'			)			);
-		add_action		( 'do_meta_boxes',						array( $this, 'create_metaboxes'		),	10,	2	);
-		add_action		( 'save_post',							array( $this, 'save_custom_meta'		),	1		);
+		add_action( 'plugins_loaded', array( $this, 'textdomain') );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts') );
+		add_action( 'do_meta_boxes', array( $this, 'create_metaboxes'), 10, 2 );
+		add_action( 'save_post', array( $this, 'save_custom_meta'), 1 );
 
 		// front end
-		add_action		( 'wp_enqueue_scripts',					array( $this, 'front_scripts'			),	10		);
-		add_filter		( 'comment_form_defaults',				array( $this, 'custom_notes_filter'		) 			);
+		add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts'), 10 );
+		add_filter( 'comment_form_defaults', array( $this, 'custom_notes_filter') );
 	}
 
 	/**
